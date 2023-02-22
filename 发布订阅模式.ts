@@ -34,4 +34,12 @@ namespace PubSub {
       this.subscribers[event].forEach((subscriber) => subscriber(data));
     }
   }
+
+  // 测试
+  const pubSub = PubSub.getInstance();
+  const callback = (data: any) => console.log(data);
+  pubSub.subscribe("test", callback);
+  pubSub.publish("test", "hello world");
+  pubSub.unsubscribe("test", callback);
+  pubSub.publish("test", "hello world");
 }
