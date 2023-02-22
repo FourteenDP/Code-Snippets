@@ -17,4 +17,28 @@ namespace Observer {
       this.observers.forEach((observer) => observer.update(data));
     }
   }
+
+  class Observer {
+    update(data: any) {
+      console.log(data);
+    }
+  }
+
+  // 测试
+  const subject = new Subject();
+
+  const observer1 = new Observer();
+  const observer2 = new Observer();
+  const observer3 = new Observer();
+
+  subject.addObserver(observer1);
+  subject.addObserver(observer2);
+  subject.addObserver(observer3);
+
+  subject.notifyObservers('hello world');
+
+  subject.removeObserver(observer2);
+
+  subject.notifyObservers('hello world');
+
 }
