@@ -1,45 +1,29 @@
+// 发布订阅模式
 namespace PubSub {
   class PubSub {
-    private static instance: PubSub;
-    private constructor() { }
-    static getInstance(): PubSub {
-      if (!PubSub.instance) {
-        PubSub.instance = new PubSub();
-      }
-      return PubSub.instance;
+    private events: any;
+    constructor() {
+      this.events = {};
     }
-
-    private subscribers: { [key: string]: Function[] } = {};
-
-    subscribe(event: string, callback: Function) {
-      if (!this.subscribers[event]) {
-        this.subscribers[event] = [];
+    on(event: string, callback: Function) {
+      if (!this.events[event]) {
+        this.events[event] = [];
       }
-      this.subscribers[event].push(callback);
+      this.events[event].push(callback);
     }
-
-    unsubscribe(event: string, callback: Function) {
-      if (!this.subscribers[event]) {
-        return;
+    emit(event: string, ...args: any[]) {
+      if (this.events[event]) {
+        this.events[event].forEach((callback: Function) => {
+          callback(...args);
+        });
       }
-      this.subscribers[event] = this.subscribers[event].filter(
-        (subscriber) => subscriber !== callback
-      );
     }
-
-    publish(event: string, data: any) {
-      if (!this.subscribers[event]) {
-        return;
+    off(event: string, callback: Function) {
+      if (this.events[event]) {
+        this.events[event] = this.events[event].filter(
+          (cb: Function) => cb !== callback
+        );
       }
-      this.subscribers[event].forEach((subscriber) => subscriber(data));
     }
   }
-
-  // 测试
-  const pubSub = PubSub.getInstance();
-  const callback = (data: any) => console.log(data);
-  pubSub.subscribe("test", callback);
-  pubSub.publish("test", "hello world");
-  pubSub.unsubscribe("test", callback);
-  pubSub.publish("test", "hello world");
 }
