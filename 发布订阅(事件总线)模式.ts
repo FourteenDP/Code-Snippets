@@ -1,12 +1,12 @@
-namespace PubSub {
-  class PubSub {
-    private static instance: PubSub;
+namespace EventBus {
+  class EventBus {
+    private static instance: EventBus;
     private constructor() { }
-    static getInstance(): PubSub {
-      if (!PubSub.instance) {
-        PubSub.instance = new PubSub();
+    static getInstance(): EventBus {
+      if (!EventBus.instance) {
+        EventBus.instance = new EventBus();
       }
-      return PubSub.instance;
+      return EventBus.instance;
     }
 
     private subscribers: { [key: string]: Function[] } = {};
@@ -39,10 +39,12 @@ namespace PubSub {
   }
 
   // 测试
-  const pubSub = PubSub.getInstance();
-  const callback = (data: any) => console.log(data);
-  pubSub.subscribe("test", callback);
-  pubSub.publish("test", "hello world");
-  pubSub.unsubscribe("test", callback);
-  pubSub.publish("test", "hello world");
+  const eventBus = EventBus.getInstance();
+  const callback = (data: any) => {
+    console.log(data);
+  }
+  eventBus.subscribe('test', callback);
+  eventBus.publish('test', 'hello world');
+  eventBus.unsubscribe('test', callback);
+  eventBus.publish('test', 'hello world');
 }

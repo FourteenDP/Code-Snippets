@@ -1,5 +1,0 @@
-namespace EventBus {
-  class EventBus {
-
-  }
-}
