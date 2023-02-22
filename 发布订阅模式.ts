@@ -11,6 +11,7 @@ namespace PubSub {
 
     private subscribers: { [key: string]: Function[] } = {};
 
+    // 订阅
     subscribe(event: string, callback: Function) {
       if (!this.subscribers[event]) {
         this.subscribers[event] = [];
@@ -18,6 +19,7 @@ namespace PubSub {
       this.subscribers[event].push(callback);
     }
 
+    // 取消订阅
     unsubscribe(event: string, callback: Function) {
       if (!this.subscribers[event]) {
         return;
@@ -27,6 +29,7 @@ namespace PubSub {
       );
     }
 
+    // 发布
     publish(event: string, data: any) {
       if (!this.subscribers[event]) {
         return;
