@@ -26,12 +26,11 @@ export function randomString(len: number, type: string[] = ['number', 'lower', '
     upper: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
     symbol: '~!@#$%^&*()_+-={}[]:";\'<>?,./|\\',
   };
-  let result = '';
+  const charType = type.map((item) => chars[item]).join('');
 
-  for (let i = 0; i < len; i++) {
-    const typeIndex = Math.floor(Math.random() * type.length);
-    const charIndex = Math.floor(Math.random() * chars[type[typeIndex]].length);
-    result += chars[type[typeIndex]][charIndex];
+  let result = '';
+  for (let i = len; i > 0; --i) {
+    result += charType[Math.floor(Math.random() * charType.length)];
   }
 
   return result;
