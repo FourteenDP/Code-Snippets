@@ -35,3 +35,21 @@ export function randomString(len: number, type: string[] = ['number', 'lower', '
 
   return result;
 }
+
+/**
+ * 判断对象类型
+ * @param obj 对象
+ * @returns {string}
+ */
+export function type(obj: any): string {
+  return Object.prototype.toString.call(obj).slice(8, -1).toLowerCase();
+}
+
+/**
+ * 判断是否为数组
+ * @param obj 对象
+ * @returns {boolean}
+ */
+export function isArray(obj: any): boolean {
+  return type(obj) === 'array';
+}
