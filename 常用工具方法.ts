@@ -15,20 +15,24 @@ export function ellipsis(str: string, len: number): string {
 /**
  * 生成随机字符串 - 支持 数字 大小写字母 特殊字符
  * @param len 长度
- * @param type[] 类型 number
+ * @param type[] 类型 ['number', 'lower', 'upper', 'symbol']
  * @returns {string}
  *
  */
-export function randomString(len: number, type: string[] = ['number', 'lower', 'upper']): string {
-  const types = {
+export function randomString(len: number, type: string[] = ['number', 'lower', 'upper', 'symbol']): string {
+  const chars = {
     number: '0123456789',
     lower: 'abcdefghijklmnopqrstuvwxyz',
     upper: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+    symbol: '~!@#$%^&*()_+-={}[]:";\'<>?,./|\\',
   };
-  let str = '';
+  let result = '';
+
   for (let i = 0; i < len; i++) {
-    const t = type[Math.floor(Math.random() * type.length)];
-    str += types[t].charAt(Math.floor(Math.random() * types[t].length));
+    const typeIndex = Math.floor(Math.random() * type.length);
+    const charIndex = Math.floor(Math.random() * chars[type[typeIndex]].length);
+    result += chars[type[typeIndex]][charIndex];
   }
-  return str;
+
+  return result;
 }
