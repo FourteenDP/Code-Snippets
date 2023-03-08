@@ -95,3 +95,50 @@ export function isNumber(obj: any): boolean {
  * @param obj 对象
  * @returns {boolean}
  */
+export function isBoolean(obj: any): boolean {
+  return type(obj) === 'boolean';
+}
+
+/**
+ * 判断是否是空对象
+ * @param obj 对象
+ * @returns {boolean}
+ */
+export function isEmptyObject(obj: any): boolean {
+  return JSON.stringify(obj) === '{}';
+}
+
+/**
+ * 判断是否是空数组
+ * @param obj 对象
+ * @returns {boolean}
+ */
+export function isEmptyArray(obj: any): boolean {
+  return JSON.stringify(obj) === '[]';
+}
+
+/**
+ * 判断是否是空值
+ * @param obj 对象
+ * @returns {boolean}
+ */
+export function isEmpty(obj: any): boolean {
+  return obj === undefined || obj === null || obj === '';
+}
+
+/**
+ * 常用正则表达式
+ * @type {{email: RegExp; mobile: RegExp; url: RegExp; tel: RegExp; number: RegExp; english: RegExp; chinese: RegExp; lower: RegExp; upper: RegExp; html: RegExp}}
+ */
+export const regExp = {
+  email: /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/,
+  mobile: /^1[3|4|5|7|8][0-9]{9}$/,
+  url: /[a-zA-z]+:\/\/[^\s]*/,
+  tel: /^(\(\d{3,4}\)|\d{3,4}-|\s)?\d{7,14}$/,
+  number: /^[0-9]*$/,
+  english: /^[a-zA-Z]+$/,
+  chinese: /^[\u4E00-\u9FA5]+$/,
+  lower: /^[a-z]+$/,
+  upper: /^[A-Z]+$/,
+  html: /<("[^"]*"|'[^']*'|[^'">])*>/,
+};
