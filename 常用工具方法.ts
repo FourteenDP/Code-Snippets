@@ -142,3 +142,14 @@ export const regExp = {
   upper: /^[A-Z]+$/,
   html: /<("[^"]*"|'[^']*'|[^'">])*>/,
 };
+
+/**
+ * 判断是否符合规则可自定义
+ * @param str 字符串
+ * @param type 类型
+ * @returns {boolean}
+  */
+type RegExpType = keyof typeof regExp;
+export function isRegExp(str: string, par): boolean {
+  return regExp[type].test(str);
+}
