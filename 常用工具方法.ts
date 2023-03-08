@@ -144,12 +144,18 @@ export const regExp = {
 };
 
 /**
- * 判断是否符合规则可自定义
- * @param str 字符串
- * @param type 类型
- * @returns {boolean}
-  */
-type RegExpType = keyof typeof regExp;
-export function isRegExp(str: string, par): boolean {
-  return regExp[type].test(str);
-}
+ * 公用判断方法
+ * @type {{isEmail: (function(*=): boolean); isMobile: (function(*=): boolean); isUrl: (function(*=): boolean); isTel: (function(*=): boolean); isNumber: (function(*=): boolean); isEnglish: (function(*=): boolean); isChinese: (function(*=): boolean); isLower: (function(*=): boolean); isUpper: (function(*=): boolean); isHtml: (function(*=): boolean)}}
+ */
+export const check = {
+  isEmail: (str: string): boolean => regExp.email.test(str),
+  isMobile: (str: string): boolean => regExp.mobile.test(str),
+  isUrl: (str: string): boolean => regExp.url.test(str),
+  isTel: (str: string): boolean => regExp.tel.test(str),
+  isNumber: (str: string): boolean => regExp.number.test(str),
+  isEnglish: (str: string): boolean => regExp.english.test(str),
+  isChinese: (str: string): boolean => regExp.chinese.test(str),
+  isLower: (str: string): boolean => regExp.lower.test(str),
+  isUpper: (str: string): boolean => regExp.upper.test(str),
+  isHtml: (str: string): boolean => regExp.html.test(str),
+};
