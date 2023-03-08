@@ -53,3 +53,45 @@ export function type(obj: any): string {
 export function isArray(obj: any): boolean {
   return type(obj) === 'array';
 }
+
+/**
+ * 判断是否为对象
+ * @param obj 对象
+ * @returns {boolean}
+ */
+export function isObject(obj: any): boolean {
+  return type(obj) === 'object';
+}
+
+/**
+ * 判断是否为函数
+ * @param obj 对象
+ * @returns {boolean}
+ */
+export function isFunction(obj: any): boolean {
+  return type(obj) === 'function';
+}
+
+/**
+ * 判断是否为字符串
+ * @param obj 对象
+ * @returns {boolean}
+ */
+export function isString(obj: any): boolean {
+  return type(obj) === 'string';
+}
+
+/**
+ * 判断是否为数字
+ * @param obj 对象
+ * @returns {boolean}
+ */
+export function isNumber(obj: any): boolean {
+  return type(obj) === 'number';
+}
+
+/**
+ * 判断是否为布尔值
+ * @param obj 对象
+ * @returns {boolean}
+ */
