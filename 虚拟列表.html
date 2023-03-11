@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/@unocss/runtime"></script>
+  <title>虚拟滚动的实现</title>
+</head>
+
+<body>
+  <div id="main"></div>
+  <script>
+    const $ = document.querySelector.bind(document)
+    const $$ = document.querySelectorAll.bind(document)
+    const main = $('#main')
+
+    const data = []
+    getData()
+    console.log(data);
+    getData()
+
+    function getData() {
+      for (let i = 1; i <= 1000; i++) {
+        data.push({
+          id: data.length + i,
+          name: `name${i}`,
+          age: Math.floor(Math.random() * 100)
+        })
+      }
+    }
+  </script>
+</body>
+
+</html>
