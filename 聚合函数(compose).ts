@@ -1,9 +1,7 @@
 namespace CodeSnippets {
   export function compose(...fns: Function[]) {
-    if (fns.length === 0) {
-      return (arg: any) => arg;
-    }
     return function (arg: any) {
+      // 遍历函数数组，从右向左执行函数
       return fns.reduceRight((result, fn) => fn(result), arg);
     };
   }
