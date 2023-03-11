@@ -7,4 +7,4 @@ date updated: {{now|yyyy-mm-dd HH:MM:ss}}
 
 # {{title}}
 
-**原文：**[{{title}}]({{url}})
+**原文：**[[{{url}}|{{title}}]]
