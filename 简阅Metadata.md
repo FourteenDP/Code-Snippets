@@ -7,4 +7,4 @@ date updated: {{now|yyyy-mm-dd HH:MM:ss}}
 
 # {{title}}
 
-**原文：**[[{{url}}|{{title}}]]
+**原文：**[{{title}}](%7B%7Burl%7D%7D)
