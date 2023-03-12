@@ -5,31 +5,97 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://cdn.jsdelivr.net/npm/@unocss/runtime"></script>
+  <style>
+    /* 重置 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+  </style>
   <title>虚拟滚动的实现</title>
 </head>
 
 <body>
-  <div id="main"></div>
-  <script>
-    const $ = document.querySelector.bind(document)
-    const $$ = document.querySelectorAll.bind(document)
-    const main = $('#main')
-
-    const data = []
-    getData()
-    console.log(data);
-    getData()
-
-    function getData() {
-      for (let i = 1; i <= 1000; i++) {
-        data.push({
-          id: data.length + i,
-          name: `name${i}`,
-          age: Math.floor(Math.random() * 100)
-        })
+  <script type="importmap">
+    {
+      "imports": {
+        "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
       }
     }
+  </script>
+  <div id="app">
+    <div :style="listStyle" @scroll="handleScroll">
+      <div v-for="item in listData" :key="item" :style="itemStyle">
+        {{item}}
+      </div>
+    </div>
+  </div>
+  <style>
+    .list {
+      height: 30px;
+      line-height: 30px;
+      border: 1px solid #ccc;
+      margin-bottom: 10px;
+    }
+
+  </style>
+
+  <script type="module">
+    import { createApp, ref } from 'vue'
+    const data = []
+    for (let i = 0; i < 1000; i++) {
+      data.push(i)
+    }
+    const app = createApp({
+      data() {
+        return {
+          data
+        }
+      },
+      setup(props, context) {
+        // 虚拟列表的实现
+        const list = ref(null)
+
+        const listHeight = 30
+        const listMargin = 10
+        const listCount = 20
+        const listTotalHeight = listHeight * listCount + listMargin * (listCount - 1)
+        const listData = []
+        for (let i = 0; i < listCount; i++) {
+          listData.push(i)
+        }
+        const listStyle = {
+          height: `${listTotalHeight}px`,
+          overflow: 'auto'
+        }
+
+        const itemStyle = {
+          height: `${listHeight}px`,
+          lineHeight: `${listHeight}px`,
+          border: '1px solid #ccc',
+          marginBottom: `${listMargin}px`
+        }
+
+        const handleScroll = (e) => {
+          const scrollTop = e.target.scrollTop
+          const start = Math.floor(scrollTop / (listHeight + listMargin))
+          const end = start + listCount
+          const list = data.slice(start, end)
+          listData.splice(0, listData.length, ...list)
+        }
+
+        return {
+          list,
+          listStyle,
+          itemStyle,
+          listData,
+          handleScroll
+        }
+      }
+    })
+    app.mount('#app')
   </script>
 </body>
 
